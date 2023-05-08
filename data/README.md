@@ -1,3 +1,5 @@
+## Data
+```
 Tập dữ liệu nhà ở cần bán được thu thập trong 6 tháng gần nhất tại TP.HCM với gần 100 nghìn bản ghi với 19 thuộc tính khác nhau:
 
 01 - subject - tiêu đề (string)
@@ -19,3 +21,4 @@ Tập dữ liệu nhà ở cần bán được thu thập trong 6 tháng gần n
 17 - protection entitlement - quyền được bảo vệ (boolean)
 18 - furnishing sell - id của tình trạng nội thất (int)
 19 - price - giá nhà đất (int)
+```
