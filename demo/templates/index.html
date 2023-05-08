@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Prediction</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<!-- Style -->
+	<link rel="stylesheet" href="style.css">
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/png" href="IMG/favicon.png"/>
+	<style>
+	
+		.main_body{
+			background-image: linear-gradient(to bottom right, white, #85A6D2, #0B243B, #85A6D2, #0B243B);
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+		}
+		
+		.main-frame {
+			background-color: white;
+			margin-top: 100px;
+			margin-bottom: 100px;
+			margin-left: 150px;
+			margin-right: 150px;
+			font-family: "Arial";
+			font-weight: bold;
+			overflow: hidden;
+			border-radius: 5px;
+			border: 2px solid #414741;
+			box-shadow: inset 0 0 15px #000000;
+		}
+		
+		.title {
+			text-shadow: 5px 5px 10px #F3C246;
+			font-weight: bold;
+			font-size: 30px;
+			margin-left: 20px;
+			display: block;
+			color: #0B243B;
+		}
+		
+		.prediction{
+			font-weight: bold;
+			font-size: 18px;
+			margin-left: 10px;
+			display: block;
+			color: #0B243B;
+		}
+		
+		.predict_info{
+			font-size: 15px;
+			margin-left: 10px;
+			display: block;
+			color: #0B243B;
+		}
+
+		.btn_submit{
+			background-color: #F3C246;
+			font-size: 15px;
+			text-align: center;
+			width: 120px;
+			height: 40px;
+			color: #0B243B;
+			padding: 8px;
+			border: none;
+			border: 1px solid #0B243B;
+			border-radius: 3px;
+		}
+
+		.btn_submit:hover{
+			border: 1px solid #000;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body class="main_body">
+	<div class="main-frame">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 ">
+					<h1 class="title">HOUSE PRICE PREDICTION IN HO CHI MINH CITY</h1>
+					<div class="col-md-7">
+						<form class="form-horizontal" action="{{ url_for('wards_name', ) }}" method="post" id="get-wards" name="get-wards">
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="district">Choose District</label>
+								<div class="col-md-4">
+									<div class="input-group">
+										<select id="district" name="district">
+											<option value="Quận 1">Quận 1</option>
+											<option value="Quận 2">Quận 2</option>
+											<option value="Quận 3">Quận 3</option>
+											<option value="Quận 4">Quận 4</option>
+											<option value="Quận 5">Quận 5</option>
+											<option value="Quận 6">Quận 6</option>
+											<option value="Quận 7">Quận 7</option>
+											<option value="Quận 8">Quận 8</option>
+											<option value="Quận 9">Quận 9</option>
+											<option value="Quận 10">Quận 10</option>
+											<option value="Quận 11">Quận 11</option>
+											<option value="Quận 12">Quận 12</option>
+											<option value="Quận Bình Tân">Quận Bình Tân</option>
+											<option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
+											<option value="Quận Gò Vấp">Quận Gò Vấp</option>
+											<option value="Quận Phú Nhuận">Quận Phú Nhuận</option>
+											<option value="Quận Tân Bình">Quận Tân Bình</option>
+											<option value="Quận Tân Phú">Quận Tân Phú</option>
+											<option value="Huyện Bình Chánh">Huyện Bình Chánh</option>
+											<option value="Huyện Cần Giờ">Huyện Cần Giờ</option>
+											<option value="Huyện Củ Chi">Huyện Củ Chi</option>
+											<option value="Huyện Hóc Môn">Huyện Hóc Môn</option>
+											<option value="Huyện Nhà Bè">Huyện Nhà Bè</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" ></label>  
+								<div class="col-md-4">
+									<input type="submit" value="Check Wards" name="Sumbit" class="btn btn_submit">
+								</div>
+							</div>
+						</form>
+						<form class="form-horizontal" action="{{ url_for('predict', ) }}" method="post" id="get_prediction" name="get_prediction">
+							{% if data %}
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="district">District</label>
+								<div class="col-md-4">
+									<div class="input-group">
+										<input type="text" class="form-control input-md" id="district" name="district" value="{{data['district']}}" readonly>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="ward_name">Ward Name</label>
+								<div class="col-md-4">
+									<select id="ward_name" name="ward_name">
+										{% for ward_name in data['wards'] %}
+											<option value="{{ward_name}}">{{ward_name|title }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+							{% endif %}
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="street_name">Street Name</label>
+								<div class="col-md-4">
+									<div class="input-group">
+										<input type="text" required="" placeholder="Enter Street Name" value="" name="street_name" class="form-control input-md">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="size">Size</label>
+								<div class="col-md-4">
+									<div class="input-group">
+										<input type="float" required="" placeholder="Enter Size" value="" name="size" class="form-control input-md">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="width">Width</label>
+								<div class="col-md-4">
+									<div class="input-group">
+										<input type="float" required="" placeholder="Enter Width" value="" name="width" class="form-control input-md">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="length">Length</label>
+								<div class="col-md-4">
+									<div class="input-group">
+										<input type="float" required="" placeholder="Enter Length" value="" name="length" class="form-control input-md">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="room">Room</label>
+								<div class="col-md-4">
+									<div class="input-group">
+										<input type="integer" required="" placeholder="Enter Room" value="" name="room" class="form-control input-md">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="toilet">Toilet</label>
+								<div class="col-md-4">
+									<div class="input-group">
+										<input type="integer" required="" placeholder="Enter Toilet" value="" name="toilet" class="form-control input-md">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="floor">Floor</label>
+								<div class="col-md-4">
+									<div class="input-group">
+										<input type="integer" required="" placeholder="Enter Floor" value="" name="floor" class="form-control input-md">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="house_type">House Type</label>
+								<div class="col-md-4">
+									<div class="input-group">
+										<select id="house_type" name="house_type">
+											<option value="1">Cấp 1</option>
+											<option value="2">Cấp 2</option>
+											<option value="3">Cấp 3</option>
+											<option value="4">Cấp 4</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" ></label>  
+								<div class="col-md-4">
+									<input type="submit" value="Predict" name="Sumbit" class="btn btn_submit">
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-md-5">
+						{% if info_predict_list %}
+						<div class="row">
+							<h4 class="predict_info"><strong>District:</strong> {{info_predict_list['district']}}</h4>
+						</div>
+						<div class="row">
+							<h4 class="predict_info"><strong>Ward:</strong> {{info_predict_list['ward_name']|title}}</h4>
+						</div>
+						<div class="row">
+							<h4 class="predict_info"><strong>Street Name:</strong> {{info_predict_list['street_name']|title}}</h4>
+						</div>
+						<div class="row">
+							<h4 class="predict_info"><strong>Size:</strong> {{info_predict_list['size']}}</h4>
+						</div>
+						<div class="row">
+							<h4 class="predict_info"><strong>Width:</strong> {{info_predict_list['width']}}</h4>
+						</div>
+						<div class="row">
+							<h4 class="predict_info"><strong>Length:</strong> {{info_predict_list['length']}}</h4>
+						</div>
+						<div class="row">
+							<h4 class="predict_info"><strong>Room:</strong> {{info_predict_list['room']}}</h4>
+						</div>
+						<div class="row">
+							<h4 class="predict_info"><strong>Toilet:</strong> {{info_predict_list['toilet']}}</h4>
+						</div>
+						<div class="row">
+							<h4 class="predict_info"><strong>Floor:</strong> {{info_predict_list['floor']}}</h4>
+						</div>
+						<div class="row">
+							<h4 class="predict_info"><strong>House Type:</strong> {{info_predict_list['house_type']}}</h4>
+						</div>
+						<div class="row">
+							<h3 class="prediction">Predictive Price (Billion Vietnam Dong): {{info_predict_list['prediction']}}</h3>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
